@@ -1,0 +1,31 @@
+name: Check
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - dev-*
+
+jobs:
+  trial:
+    name: Trial
+    runs-on: ubuntu-latest
+    env:
+      ENV_1: ${{ secrets.ENV_1 }}
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Test1
+        env:
+          ENV_2: ${{ secrets.ENV_2 }}
+        run: |
+          echo "ENV1 = $ENV_1"
+          echo "ENV2 = $ENV_2"
+          
+      - name: Test2
+        run: |
+          echo "ENV2 = $ENV_2"
+        env:
+          ENV_2: ${{ secrets.ENV_2 }}
