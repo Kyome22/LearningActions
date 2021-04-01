@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENV_1: ${{ secrets.ENV_1 }}
-    
+
     steps:
       - uses: actions/checkout@v2
 
@@ -21,11 +21,17 @@ jobs:
         env:
           ENV_2: ${{ secrets.ENV_2 }}
         run: |
-          echo "ENV1 = $ENV_1"
-          echo "ENV2 = $ENV_2"
-          
+          echo "Test1 - ENV1 = $ENV_1" >> result.txt
+          echo "Test1 - ENV2 = $ENV_2" >> result.txt
+
       - name: Test2
         run: |
-          echo "ENV2 = $ENV_2"
+          echo "Test2 - ENV2 = $ENV_2" >> result.txt
         env:
           ENV_2: ${{ secrets.ENV_2 }}
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Result
+          path: result.txt
