@@ -18,15 +18,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Test1
-        env:
-          ENV_2: ${{ secrets.ENV_2 }}
         run: |
           echo "Test1 - ENV1 = $ENV_1" >> result.txt
           echo "Test1 - ENV2 = $ENV_2" >> result.txt
-
-      - name: Test2
-        run: |
-          echo "Test2 - ENV2 = $ENV_2" >> result.txt
         env:
           ENV_2: ${{ secrets.ENV_2 }}
 
